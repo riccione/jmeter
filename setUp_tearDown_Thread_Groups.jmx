@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -11,6 +11,21 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="fpath" elementType="Argument">
+            <stringProp name="Argument.name">fpath</stringProp>
+            <stringProp name="Argument.value">login</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="upass" elementType="Argument">
+            <stringProp name="Argument.name">upass</stringProp>
+            <stringProp name="Argument.value">test</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
       <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -26,15 +41,14 @@
       <hashTree>
         <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
         <hashTree>
-          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler login sampler" enabled="true">
+          <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler login" enabled="true">
             <boolProp name="WAITING">true</boolProp>
             <boolProp name="SUCCESFULL">true</boolProp>
             <stringProp name="RESPONSE_CODE">200</stringProp>
             <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
-            <stringProp name="REQUEST_DATA">Dummy Sampler used to simulate requests and responses
-without actual network activity. This helps debugging tests.</stringProp>
-            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
-without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="REQUEST_DATA">login:admin
+password:admin</stringProp>
+            <stringProp name="RESPONSE_DATA">{&quot;success&quot;:true}</stringProp>
             <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
             <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
             <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
@@ -47,8 +61,8 @@ without actual network activity. This helps debugging tests.</stringProp>
           <stringProp name="RESPONSE_CODE">200</stringProp>
           <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
           <stringProp name="REQUEST_DATA">username:testuser${__iterationNum()}
-password:test</stringProp>
-          <stringProp name="RESPONSE_DATA">{&quot;success&quot;:true,&quot;id&quot;:${__UUID},username:testuser${__iterationNum()},&quot;password&quot;:test}</stringProp>
+password:${upass}</stringProp>
+          <stringProp name="RESPONSE_DATA">{&quot;success&quot;:true,&quot;id&quot;:${__UUID},username:testuser${__iterationNum()},&quot;password&quot;:${upass}}</stringProp>
           <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
           <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
           <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
@@ -69,7 +83,7 @@ password:test</stringProp>
 
 	FileWriter filePointer = new FileWriter(&quot;${fpath}&quot;, true);
 
-	filePointer.append(&quot;${uid}&quot;+&quot;, &quot;+&quot;${uname}&quot;+&quot;, &quot;+&quot;{$upass}&quot;+&quot;\n&quot;);
+	filePointer.append(&quot;${uid}&quot;+&quot;, &quot;+&quot;${uname}&quot;+&quot;, &quot;+&quot;${upass}&quot;+&quot;\n&quot;);
 
 	filePointer.close();</stringProp>
           </BeanShellPostProcessor>
@@ -118,7 +132,7 @@ password:${upass}</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">10</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -142,14 +156,13 @@ password:${upass}</stringProp>
         <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
         <hashTree>
           <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler login" enabled="true">
-            <boolProp name="WAITING">true</boolProp>
+            <boolProp name="WAITING">false</boolProp>
             <boolProp name="SUCCESFULL">true</boolProp>
             <stringProp name="RESPONSE_CODE">200</stringProp>
             <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
-            <stringProp name="REQUEST_DATA">Dummy Sampler used to simulate requests and responses
-without actual network activity. This helps debugging tests.</stringProp>
-            <stringProp name="RESPONSE_DATA">Dummy Sampler used to simulate requests and responses
-without actual network activity. This helps debugging tests.</stringProp>
+            <stringProp name="REQUEST_DATA">login:admin
+password:admin</stringProp>
+            <stringProp name="RESPONSE_DATA">{&quot;success&quot;:true}</stringProp>
             <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
             <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
             <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
