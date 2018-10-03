@@ -93,10 +93,10 @@ password:${upass}</stringProp>
       <com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup guiclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroupGui" testclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup" testname="bzm - Concurrency Thread Group" enabled="true">
         <elementProp name="ThreadGroup.main_controller" elementType="com.blazemeter.jmeter.control.VirtualUserController"/>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="TargetLevel"></stringProp>
-        <stringProp name="RampUp"></stringProp>
-        <stringProp name="Steps"></stringProp>
-        <stringProp name="Hold"></stringProp>
+        <stringProp name="TargetLevel">10</stringProp>
+        <stringProp name="RampUp">0</stringProp>
+        <stringProp name="Steps">3</stringProp>
+        <stringProp name="Hold">0.03</stringProp>
         <stringProp name="LogFilename"></stringProp>
         <stringProp name="Iterations"></stringProp>
         <stringProp name="Unit">M</stringProp>
@@ -114,7 +114,7 @@ password:${upass}</stringProp>
           <stringProp name="variableNames">uid,uname,upass</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler login" enabled="true">
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler login bzm" enabled="true">
           <boolProp name="WAITING">true</boolProp>
           <boolProp name="SUCCESFULL">true</boolProp>
           <stringProp name="RESPONSE_CODE">200</stringProp>
